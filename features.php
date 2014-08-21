@@ -278,7 +278,7 @@ function sbrowser( $server, $color, $feature, $server_data, $stream_browser, $ur
 	if(!(strcmp($arg,"info") == 0 && strcmp($arg2,"expandall") == 0)) {
 		echo "&nbsp;<small>(<a title=\"Expand all\" href=\"{$baseurl}feature=$feature&amp;arg=info&amp;arg2=expandall \" target=_self>expand all</a>)</small>";
 	}
-	echo "&nbsp;<small>(<a title=\"Refresh streams table\" href=\"index.php?body=main&amp;dir=$dir&amp;server=$server&amp;feature=$feature\" target=_self>refresh</a>)</small>";
+	echo "&nbsp;<small><a title=\"Refresh streams table\" href=\"index.php?body=main&amp;dir=$dir&amp;server=$server&amp;feature=$feature\" target=_self><span class='glyphicon glyphicon-refresh'></span></a></small>";
 	if( $updating === true ) {
 		echo "&nbsp;<small>(<a title=\"Update streams table\" href=\"{$baseurl}feature=$feature&amp;arg=update\" target=_self>update</a>)</small></td>";
 	}

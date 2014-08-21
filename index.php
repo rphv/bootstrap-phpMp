@@ -256,8 +256,10 @@ else
 	echo "<title>{$config["title"]} - $body</title>";
 
 	echo "<link href=\"bootstrap.min.css\" rel=\"stylesheet\">";
+	echo "<link href=\"rphv-phpMp.css\" rel=\"stylesheet\">";
 	echo "<script src=\"jquery-2.1.1.min.js\"></script>";
 	echo "<script src=\"rphv-phpMp.js\"></script>";
+
 	echo "</head>";
 
 	echo "<body>";

@@ -169,33 +169,12 @@ if( isset( $status["state"] ))
 	echo "<table align=\"center\" summary=\"Border Table Hack\" align=\"center\">";
 	echo "<tr>";#<td width=\"100%\">";
 
-	echo "<b>";
 
- 	if( isset( $status["updating_db"] ))
-	{
-		echo "<small>";
-	}
-	if( strcmp( $status["state"],"play") == "0")
-        {
-	        echo "Playing";
-	}
-        else if( strcmp( $status["state"], "stop" ) == "0")
-	{
-	        echo "Stopped";
-	}
-	else if( strcmp( $status["state"], "pause") == "0")
-	{
-	        echo "Paused";
-	}
- 	if( isset( $status["updating_db"] ))
-	{
-	        echo "&nbsp;/&nbsp;Updating</small>";
-	}
-	echo "</b>";
 	echo "<small>";
-	echo "&nbsp;(<a title=\"Refresh the Playlist Window\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\">refresh</a>)";
-	echo "<a title=\"Edit the playlist\" href=\"index.php?body=main&amp;server=$server\" style=\"float: right\">Edit Playlist</a>";
+	echo "&nbsp;<a style='float: left' title=\"Refresh the Playlist Window\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\"><span class='glyphicon glyphicon-refresh'></a>";
+	echo "<a title=\"Edit the playlist\" href=\"index.php?body=main&amp;server=$server\" style=\"float: right\"><span class='glyphicon glyphicon-edit'></span></a>";
 	echo "</small></td></tr></table>";
+	echo "<br>";
 	// STATUSBAR Begin: End playlist_body
 
 	if( strcmp( $status["state"], "play" ) == "0" || "0" == strcmp( $status["state"], "pause" ))
@@ -206,6 +185,31 @@ if( isset( $status["state"] ))
 
 		// SONG INFO Begin: Second table from top
 		$song_info = getPlaylistInfo( $fp, $num, $config["display_fields"] );
+
+
+		echo "<div style='text-align: center'><b>";
+	 	if( isset( $status["updating_db"] ))
+		{
+			echo "<small>";
+		}
+		if( strcmp( $status["state"],"play") == "0")
+	  {
+		        echo "Playing";
+		}
+	        else if( strcmp( $status["state"], "stop" ) == "0")
+		{
+		        echo "Stopped";
+		}
+		else if( strcmp( $status["state"], "pause") == "0")
+		{
+		        echo "Paused";
+		}
+	 	if( isset( $status["updating_db"] ))
+		{
+		        echo "&nbsp;/&nbsp;Updating</small>";
+		}
+		echo "</b></div>";
+
 		echo "<table align=\"center\" summary=\"Current Song Information\" cellspacing=0 cellpadding=0>";
 		echo "<tr>";
 		echo "<td align=\"{$config["playlist_align"]}\">";
@@ -314,7 +318,7 @@ if( isset( $status["state"] ))
 		$num = "-1";
 	}
 }
-
+echo "<br>";
 // crossfade | random | repeat (at bottom of file)
 echo "<table align=\"center\" align=\"center\" summary=\"Crosfade | random | repeat\"  align=\"{$config["playlist_align"]}\" cellspacing=0 cellpadding=0>";
 echo "<tr><td align=\"{$config["playlist_align"]}\"><small>";
@@ -345,7 +349,6 @@ else
 	}
 }
 
-echo "&nbsp;|&nbsp;";
 
 if( $commands["random"] === true )
 {
@@ -372,7 +375,6 @@ else
 	}
 }
 
-echo "&nbsp;|&nbsp;";
 
 if( $commands["repeat"] === true )
 {
@@ -403,7 +405,7 @@ else
 echo "</td></tr></table>";
 
 echo "</td></tr></table>";
-
+echo "<br>";
 // Begin [<<][Play][>>][| |][Stop] Table
 echo "<table align=\"center\" summary=\"[<<][Play][>>][| |][Stop]\" align=\"{$config["playlist_align"]}\" cellspacing=1 cellpadding=0>";
 echo "<tr>";
@@ -500,14 +502,13 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	echo "<table align=\"center\" summary=\"Volume\" cellspacing=2>";
 	echo "<tr>";
 	echo "<!-- Cannot correctly space 'nowrap' td's -->";
-	echo "<td align=\"center\"><b>Volume</b></td>";
 	echo "<td></td>";
 	/* Begin Volume Bar */
 	$vol_div = "1";
 	echo "<td valign=\"middle\" align=\"center\">";
 	if( $status["volume"] == "0" )
 	{
-		echo "<";
+		echo "<span class='glyphicon glyphicon-chevron-left disabled'></span>";
 	}
 	else if ( $commands["setvol"] === true)
 	{
@@ -517,10 +518,10 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	}
 	echo "</td>";
 	echo "<td valign=\"middle\" align=\"center\">";
-	echo "<!-- This table in a table is required for correct rendering -->";
 	echo "<!-- Begin Seek Bar -->";
 
 	// Hopefully this, in the future turns into a gd rendered png image, this is a horrible way to be doing things!
+	/*
 	echo "<table summary=\"Volume Hack\" cellspacing=0 cellpadding=0>";
 	for( $i=0; $i < round( $status["volume"]/$vol_div ); $i++ )
 	{
@@ -531,7 +532,12 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 		echo "<td width=5 bgcolor=\"{$colors["volume"]["background"]}></td>";
 	}
 	echo "<!-- End Seek Bar -->";
-	echo "</table></td>";
+	echo "</table>";
+	*/
+
+	echo "<input type='range' id='volume' min='0' max='100' value=".$status["volume"]." disabled>";
+
+	echo "</td>";
 	echo "<td valign=\"middle\" align=\"center\">";
 
 	$topvol = $status["volume"] + $config["volume_incr"];
@@ -548,7 +554,7 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	}
 	else
 	{
-		echo ">";
+		echo "<span class='glyphicon glyphicon-chevron-right disabled'></span>";
 	}
 	echo "</td></tr></table>";
 }
@@ -563,7 +569,7 @@ if( ! $status["playlistlength"] == 0 )
 
 	// This is for the border table
 	echo "<table align=\"center\" width=\"100%\" summary=\"Playlist Table\" cellspacing=1><tr>";
-	echo "<tr valign=\"middle\"><td><b>Playlist</b>&nbsp;";
+	echo "<tr valign=\"middle\"><td style='text-align: center'><b>Playlist</b>&nbsp;";
 	if( $config["playlist_option_hide"] === true )
 	{
 		if( $show_options == "0" )
@@ -583,39 +589,39 @@ if( ! $status["playlistlength"] == 0 )
 		/* clear | crop | shuffle | save */
 		if( $commands["clear"] === true )
 		{
-			echo "<a title=\"Clear the Active Playlist\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;command=clear\">clear</a>";
+			echo "<a title=\"Clear the Active Playlist\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;command=clear\"><span class='btn btn-default'><span class='glyphicon glyphicon-ban-circle'></span></span></a>";
 		}
 		else
 		{
-			echo "clear";
+			echo "<span class='btn btn-default disabled'><span class='glyphicon glyphicon-ban-circle disabled'></span></span>";
 		}
-		echo "&nbsp;|&nbsp;";
+
 		if( $status["playlistlength"] > "1" && strcmp( $status["state"], "stop" ) && $commands["delete"] === true )
 		{
 			echo "<a title=\"Remove All Songs Except The Currently Playing Song\" ";
-			echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;crop=yes\">crop</a>";
+			echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;crop=yes\"><span class='btn btn-default'><span class='glyphicon glyphicon-remove-circle'></span></span></a>";
 		}
 		else
 		{
-			echo "crop";
+			echo "<span class='btn btn-default disabled'><span class='glyphicon glyphicon-remove-circle disabled'></span></span>";
 		}
-		echo "&nbsp;|&nbsp;";
+
 		if( $commands["save"] === true )
 		{
-			echo "<a title=\"Save the Active Playlist to the Saved Playlists\" target=main href=\"index.php?body=main&amp;server=$server&amp;save=yes\">save</a>";
+			echo "<a title=\"Save the Active Playlist to the Saved Playlists\" target=main href=\"index.php?body=main&amp;server=$server&amp;save=yes\"><span class='btn btn-default'><span class='glyphicon glyphicon-save'></span></span></a>";
 		}
 		else
 		{
-			echo "save";
+			echo "<span class='btn btn-default disabled'><span class='glyphicon glyphicon-save disabled'></span></span>";
 		}
-		echo "&nbsp;|&nbsp;";
+
 		if( $status["playlistlength"] >= "2" && $commands["shuffle"] === true )
 		{
-			echo "<a title=\"Shuffle the Active Playlist\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;command=shuffle\">shuffle</a>";
+			echo "<a title=\"Shuffle the Active Playlist\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=1&amp;command=shuffle\"><span class='btn btn-default'><span class='glyphicon glyphicon-link'></span></span></a>";
 		}
 		else
 		{
-			echo "shuffle";
+			echo "<span class='btn btn-default disabled'><span class='glyphicon glyphicon-link disabled'></span></span>";
 		}
 		echo "</small></td></tr>";
 	}

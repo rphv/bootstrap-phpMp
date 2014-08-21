@@ -1,0 +1,24 @@
+table {
+	width: 100%;
+}
+
+body > table:nth-child(1) > tbody > tr > td > table:nth-child(8) > tbody > tr > td > small span {
+	width: 33%;
+}
+
+body > table:nth-child(3) > tbody > tr:nth-child(1) > td span {
+	width: 25%;
+}
+
+body > table:nth-child(7) > tbody > tr > td > table:nth-child(1) > tbody > tr:nth-child(3) > td > small .btn {
+	width: 25%;
+}
+
+.glyphicon {
+	font-size: 128px;
+	width: 100%;
+}
+
+body * {
+	font-size: 32px;
+}

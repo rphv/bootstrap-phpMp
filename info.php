@@ -222,7 +222,7 @@ function printPlaylistInfo( $conn, $num, $hide, $show_options, $length, $command
 
 		if( $commands["move"] === false || ($config["enable_swap"] === true && $ret["Pos"] == "0" ))
 		{
-			echo "<small>^</small><br>";
+			echo "<small><span class='glyphicon glyphicon-chevron-up'></span></small><br>";
 		}
 		else if( $config["enable_swap"] === true )
 		{
@@ -233,18 +233,18 @@ function printPlaylistInfo( $conn, $num, $hide, $show_options, $length, $command
 
 		if( $commands["delete"] === false )
 		{
-			echo "<small>d</small>";
+			echo "<small><span class='glyphicon glyphicon-remove disabled'></span></small>";
 		}
 		else
 		{
 			echo "<small><a title=\"Remove song from the playlist\" ";
 			echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=deleteid&amp;arg=$id&amp;time=$time#$goto\">";
-			echo "d</a></small>";
+			echo "<span class='glyphicon glyphicon-remove'></span></a></small>";
 		}
 
 		if( ( $commands["swap"] === false || $length == ( $ret["Pos"] + 1 )) && $config["enable_swap"] === true )
 		{
-			echo "<br><small>v</small>";
+			echo "<br><small><span class='glyphicon glyphicon-chevron-down'></span></small>";
 		}
 		else if( $config["enable_swap"] === true )
 		{

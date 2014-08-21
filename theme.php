@@ -92,16 +92,16 @@ if ($config["use_images"] === true)
 {
 	// The following are examples of images you could use for phpMp. These are user-supplied.
 	$display["playing"]["prev"]["active"] = "<a title=\"Previous\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;command=previous\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-step-backward\"></span></span></a>";
-	$display["playing"]["prev"]["inactive"] = "<img src=\"images/previous_inactive.gif\" border=0>";
+	$display["playing"]["prev"]["inactive"] = "<span class=\"btn btn-default disabled\"><span class=\"glyphicon glyphicon-step-backward\"></span></span>";
 	$display["playing"]["play"]["active"] = "<a title=\"Play\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=play\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-play\"></span></span></a>";
 	$display["playing"]["play"]["pause"] = "<a title=\"Pause\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=pause\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-play\"></span></span></a>";
-	$display["playing"]["play"]["inactive"] = "<img src=\"images/play_inactive.gif\" border=0>";
+	$display["playing"]["play"]["inactive"] = "<span class=\"btn btn-default disabled\"><span class=\"glyphicon glyphicon-play\"></span></span>";
 	$display["playing"]["next"]["active"] = "<a title=\"Next\"  href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=next\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-step-forward\"></span></span></a>";
-	$display["playing"]["next"]["inactive"] = "<img src=\"images/next_inactive.gif\" border=0>";
+	$display["playing"]["next"]["inactive"] = "<span class=\"btn btn-default disabled\"><span class=\"glyphicon glyphicon-step-forward\"></span></span>";
 	$display["playing"]["pause"]["active"] = "<a title=\"Pause\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=pause\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-pause\"></span></span></a>";
-	$display["playing"]["pause"]["inactive"] = "<img src=\"images/pause_inactive.gif\" border=0>";
+	$display["playing"]["pause"]["inactive"] = "<span class=\"btn btn-default disabled\"><span class=\"glyphicon glyphicon-pause\"></span></span>";
 	$display["playing"]["stop"]["active"] = "<a title=\"Stop\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=stop\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-stop\"></span></span></a>";
-	$display["playing"]["stop"]["inactive"] = "<img src=\"images/stop_inactive.gif\" border=0>";
+	$display["playing"]["stop"]["inactive"] = "<span class=\"btn btn-default disabled\"><span class=\"glyphicon glyphicon-stop\"></span></span>";
 }
 else
 {
