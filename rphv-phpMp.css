@@ -2,11 +2,11 @@ table {
 	width: 100%;
 }
 
-body > table:nth-child(1) > tbody > tr > td > table:nth-child(8) > tbody > tr > td > small span {
+body > table:nth-child(1) > tbody > tr > td > table:nth-child(8) > tbody > tr > td > small .btn {
 	width: 33%;
 }
 
-body > table:nth-child(3) > tbody > tr:nth-child(1) > td span {
+body > table:nth-child(3) > tbody > tr:nth-child(1) > td .btn {
 	width: 25%;
 }
 
@@ -16,6 +16,9 @@ body > table:nth-child(7) > tbody > tr > td > table:nth-child(1) > tbody > tr:nt
 
 .glyphicon {
 	font-size: 128px;
+}
+
+.btn > span.glyphicon {
 	width: 100%;
 }
 
