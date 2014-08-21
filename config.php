@@ -75,7 +75,7 @@ $config = array(
 		/******************************************************************
 		/ Use this to change the width of either the main/playlist window /
 		/*****************************************************************/
-		"frames_layout" => "cols=\"1*,21%\"",
+		"frames_layout" => "rows=\"1*,50%\"",
 
 		/******************************************
 		/ Set the value of crossfade (in seconds) /
@@ -163,7 +163,7 @@ $config = array(
 		/*************************************************************
 		/ Use user-supplied images (see theme.php for more details). /
 		/************************************************************/
-		"use_images" => false,
+		"use_images" => true,
 
 		/********************************************************************************************************
 		/ Remove any of the following to get rid of the field in the music tables.  				/

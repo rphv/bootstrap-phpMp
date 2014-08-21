@@ -233,19 +233,13 @@ if( $commands["listall"] === false || $commands["lsinfo"] === false || $commands
 else if( empty( $body ) && empty( $feature ))
 {
 	unset( $hostport );
-	echo "<title>{$config["title"]}</title>";
-	echo "</head>";
 
-	echo "<frameset {$config["frames_layout"]}>";
 	$mainurl = "index.php?body=main&amp;server=$server";
 	if($inline) {
 		$mainurl .= "&amp;inline=$inline&amp;search=$search";
 	}
+	header('Location: '."index.php?body=playlist&amp;server=$server");
 
-	echo "<frame name=\"main\" src=\"$mainurl\" frameborder={$config["frame_border_size"]}>";
-	echo "<frame name=\"playlist\" src=\"index.php?body=playlist&amp;server=$server\" frameborder=0>";
-	echo "<noframes>NO FRAMES ... try phpMp+</noframes>";
-	echo "</frameset>";
 }
 else
 {
@@ -261,21 +255,12 @@ else
 	}
 	echo "<title>{$config["title"]} - $body</title>";
 
-	// I would _much_ rather have a php generated stylesheet
-	echo "<style type=\"text/css\">";
-	echo "* { font-family: {$fonts["all"]}; }";
-	echo "A:link, A:visited, A:active { text-decoration: none; border-style: none none none none; }";
-	echo "a.green:link, a.green:active, a.green:visited, a.green:hover {background: {$colors["playing"]["on"]}}";
-	echo "table { width: 100%; border-style: none }";
-	echo "form { padding: 0; margin: 0 }";
-	echo "tr.noborder td { border: none; border-style: none; border-color: {$colors["directories"]["body"][0]} }";
-	echo "</style>";
+	echo "<link href=\"bootstrap.min.css\" rel=\"stylesheet\">";
+	echo "<script src=\"jquery-2.1.1.min.js\"></script>";
+	echo "<script src=\"rphv-phpMp.js\"></script>";
 	echo "</head>";
 
-	echo "<body link={$colors["links"]["link"]} ";
-	echo "vlink={$colors["links"]["visual"]} "; 
-	echo "alink={$colors["links"]["active"]} ";
-	echo "bgcolor={$colors["background"]}>";
+	echo "<body>";
 
 	echo "<!-- The Header (index.php) Ends Here, Body begins here -->";
 

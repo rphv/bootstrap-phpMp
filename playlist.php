@@ -74,30 +74,6 @@ if( isset( $streamurl ) && ! empty( $streamurl )) {
 		}
 		unset($tmp);
 		unset($tmpsize);
-
-// Disable this code for now, ftp handling is broken in php, there is a bug
-// in bugzilla
-//	} else if(preg_match("/ftp:\/\/.*/",$streamurl)) {
-/*
-		$ftp_server = $streamurl;
- 		$conn_id = ftp_connect($ftp_server);
-
-		$ftp_user_name = "anonymous";
-		$ftp_user_pass = "";
-
-		$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-		if ((!$conn_id) || (!$login_result)) { 
-			echo "FTP connection has failed!";
-			echo "Attempted to connect to $ftp_server for user $ftp_user_name"; 
-			exit; 
-		} else {
-			echo "Connected to $ftp_server, for user $ftp_user_name";
-		}
-		echo "It appears the ftp has succeeded";
-
-		// close the FTP stream 
-		ftp_close($conn_id);
-*/
 	}
 }
 
@@ -186,11 +162,11 @@ if( isset( $status["state"] ))
 
 	// STATUSBAR Begin: Top playlist_body
 	echo "<!-- Begin the Top of the first table, Should only display the status and refresh -->";
-        echo "<table summary=\"Status &amp; Refresh\" cellspacing=2 bgcolor=\"{$colors["playing"]["title"]}\">";
+        echo "<table align=\"center\" summary=\"Status &amp; Refresh\" cellspacing=2>";
 	echo "<tr valign=\"middle\"><td>";
 
  	// The global table tags begin here. This is code to make the border, this really is a hack but improves looks quite a bit
-	echo "<table summary=\"Border Table Hack\" align=\"center\" bgcolor=\"{$colors["playing"]["title"]}\">";
+	echo "<table align=\"center\" summary=\"Border Table Hack\" align=\"center\">";
 	echo "<tr>";#<td width=\"100%\">";
 
 	echo "<b>";
@@ -218,6 +194,7 @@ if( isset( $status["state"] ))
 	echo "</b>";
 	echo "<small>";
 	echo "&nbsp;(<a title=\"Refresh the Playlist Window\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\">refresh</a>)";
+	echo "<a title=\"Edit the playlist\" href=\"index.php?body=main&amp;server=$server\" style=\"float: right\">Edit Playlist</a>";
 	echo "</small></td></tr></table>";
 	// STATUSBAR Begin: End playlist_body
 
@@ -229,7 +206,7 @@ if( isset( $status["state"] ))
 
 		// SONG INFO Begin: Second table from top
 		$song_info = getPlaylistInfo( $fp, $num, $config["display_fields"] );
-		echo "<table summary=\"Current Song Information\" cellspacing=0 bgcolor=\"{$colors["playing"]["body"]}\" cellpadding=0>";
+		echo "<table align=\"center\" summary=\"Current Song Information\" cellspacing=0 cellpadding=0>";
 		echo "<tr>";
 		echo "<td align=\"{$config["playlist_align"]}\">";
 		echo "<a title=\"Jump to the Current Song\" href=#$num>";
@@ -285,7 +262,7 @@ if( isset( $status["state"] ))
 		echo "</td></tr></table>";
 
 		echo "<!-- Begin Seek Bar -->";
-		echo "<table summary=\"Seek Bar\" align=\"center\" cellspacing=0 bgcolor=\"{$colors["playing"]["body"]}\" cellpadding=0>";
+		echo "<table align=\"center\" summary=\"Seek Bar\" align=\"center\" cellspacing=0 cellpadding=0>";
 		echo "<tr><td align=\"left\" width=\"5%\"></td>";
 
 		$col=$colors["time"]["background"];
@@ -312,7 +289,7 @@ if( isset( $status["state"] ))
 					$sec = "0" . $sec;
 				}
 
-				echo "<td border=0 width=8 height=8 bgcolor=\"$col\">";
+				echo "<td border=0 width=8 height=8>";
 				if( $commands["seekid"] === true )
 				{
 					echo "<a href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=seekid&amp;arg=$songid&amp;arg2=$seek\"";
@@ -339,7 +316,7 @@ if( isset( $status["state"] ))
 }
 
 // crossfade | random | repeat (at bottom of file)
-echo "<table summary=\"Crosfade | random | repeat\"  align=\"{$config["playlist_align"]}\" cellspacing=0 bgcolor=\"{$colors["playing"]["body"]}\" cellpadding=0>";
+echo "<table align=\"center\" align=\"center\" summary=\"Crosfade | random | repeat\"  align=\"{$config["playlist_align"]}\" cellspacing=0 cellpadding=0>";
 echo "<tr><td align=\"{$config["playlist_align"]}\"><small>";
 
 if( $commands["crossfade"] === true )
@@ -348,23 +325,23 @@ if( $commands["crossfade"] === true )
 	{
 		echo "<a title=\"Set Crossfade to {$config["crossfade_seconds"]} Seconds\" ";
 		echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=crossfade&amp;arg=";
-		echo $config["crossfade_seconds"]*(int)(!$xfade) . "\">crossfade</a>";
+		echo $config["crossfade_seconds"]*(int)(!$xfade) . "\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-transfer\"></span></span></a>";
 	}
 	else
 	{
 		echo "<a title=\"Remove Crossfade\" class=\"green\" ";
-		echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=crossfade&amp;arg=0\">crossfade</a>";
+		echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=crossfade&amp;arg=0\"><span class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-transfer\"></span></span></a>";
 	};
 }
 else
 {
 	if( $xfade == "0" )
 	{
-		echo "crossfade";
+		echo "<span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-transfer\"></span></span>";
 	}
 	else
 	{
-		echo "<a title=\"Remove Crossfade\" class=\"green\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\">crossfade</a>";
+		echo "<a title=\"Remove Crossfade\" class=\"green\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-transfer\"></span></span></a>";
 	}
 }
 
@@ -375,23 +352,23 @@ if( $commands["random"] === true )
 	if( $random == "0" )
 	{
 		echo "<a title=\"Turn Random On\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=random&amp;arg=";
-		echo (int)(!$random) . "\">random</a>";
+		echo (int)(!$random) . "\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-random\"></span></span></a>";
 	}
 	else
 	{
 		echo "<a title=\"Turn Random Off\" class=\"green\"  href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=random&amp;arg=";
-		echo (int)(!$random) . "\">random</a>";
+		echo (int)(!$random) . "\"><span class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-random\"></span></span></a>";
 	}
 }
 else
 {
 	if( $random == "0" )
 	{
-		echo "random";
+		echo "<span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-random\"></span></span>";
 	}
 	else
 	{
-		echo "<a title=\"Turn Random Off\" class=\"green\"  href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\">random</a>";
+		echo "<a title=\"Turn Random Off\" class=\"green\"  href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\"><span class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-random\"></span></span></a>";
 	}
 }
 
@@ -402,23 +379,23 @@ if( $commands["repeat"] === true )
 	if( $repeat == "0" )
 	{
 		echo "<a title=\"Turn Repeat On\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=repeat&amp;arg=";
-		echo (int)(!$repeat) . "\">repeat</a>";
+		echo (int)(!$repeat) . "\"><span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-repeat\"></span></span></a>";
 	}
 	else
 	{
 		echo "<a title=\"Turn Repeat Off\" class=\"green\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=repeat&amp;arg=";
-		echo (int)(!$repeat) . "\">repeat</a>";
+		echo (int)(!$repeat) . "\"><span class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-repeat\"></span></span></a>";
 	}
 }
 else
 {
 	if( $repeat == "0" )
 	{
-		echo "repeat";
+		echo "<span class=\"btn btn-default\"><span class=\"glyphicon glyphicon-repeat\"></span></span>";
 	}
 	else
 	{
-		echo "<a title=\"Turn Repeat Off\" class=\"green\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\">repeat</a>";
+		echo "<a title=\"Turn Repeat Off\" class=\"green\" href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options\"><span class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-repeat\"></span></span></a>";
 	}
 }
 
@@ -428,7 +405,7 @@ echo "</td></tr></table>";
 echo "</td></tr></table>";
 
 // Begin [<<][Play][>>][| |][Stop] Table
-echo "<table summary=\"[<<][Play][>>][| |][Stop]\" align=\"{$config["playlist_align"]}\" cellspacing=1 bgcolor=\"{$colors["playing"]["title"]}\" cellpadding=0>";
+echo "<table align=\"center\" summary=\"[<<][Play][>>][| |][Stop]\" align=\"{$config["playlist_align"]}\" cellspacing=1 cellpadding=0>";
 echo "<tr>";
 echo "<!-- Cannot correctly space 'nowrap' td's -->";
 echo "<td align=\"{$config["playlist_align"]}\" nowrap>";
@@ -520,7 +497,7 @@ if( strcmp( $config["playlist_align"], "center" ))
 if( $status["volume"] >= "0" && $config["display_volume"] === true )
 {
 
-	echo "<table summary=\"Volume\" cellspacing=2 bgcolor=\"{$colors["volume"]["title"]}\">";
+	echo "<table align=\"center\" summary=\"Volume\" cellspacing=2>";
 	echo "<tr>";
 	echo "<!-- Cannot correctly space 'nowrap' td's -->";
 	echo "<td align=\"center\"><b>Volume</b></td>";
@@ -536,7 +513,7 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	{
 		echo "<a title=\"Decrease Volume by {$config["volume_incr"]}%\" ";
 		echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=setvol&amp;arg=";
-		echo ($status["volume"] - $config["volume_incr"]) . "\"><</a>";
+		echo ($status["volume"] - $config["volume_incr"]) . "\"><span class=\"glyphicon glyphicon-chevron-left\"></span></a>";
 	}
 	echo "</td>";
 	echo "<td valign=\"middle\" align=\"center\">";
@@ -551,7 +528,7 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	}
 	for (; $i < round( 100/$vol_div ); $i++ )
 	{
-		echo "<td width=5 bgcolor=\"{$colors["volume"]["background"]}\"></td>";
+		echo "<td width=5 bgcolor=\"{$colors["volume"]["background"]}></td>";
 	}
 	echo "<!-- End Seek Bar -->";
 	echo "</table></td>";
@@ -567,7 +544,7 @@ if( $status["volume"] >= "0" && $config["display_volume"] === true )
 	{
 		echo "<a  title=\"Increase Volume to {$topvol}%\" ";
 		echo "href=\"index.php?body=playlist&amp;server=$server&amp;hide=$hide&amp;show_options=$show_options&amp;command=setvol&amp;arg=";
-		echo ($topvol) . "\">></a>";
+		echo ($topvol) . "\"><span class=\"glyphicon glyphicon-chevron-right\"></span></a>";
 	}
 	else
 	{
@@ -581,11 +558,11 @@ echo "<br>";
 
 if( ! $status["playlistlength"] == 0 )
 {
-	echo "<table summary=\"Playlist Table (Border)\" cellspacing=1 bgcolor=\"{$colors["playlist"]["title"]}\">";
+	echo "<table align=\"center\" width=\"100%\" summary=\"Playlist Table (Border)\">";
 	echo "<tr><td>";
 
 	// This is for the border table
-	echo "<table summary=\"Playlist Table\" cellspacing=1><tr>";
+	echo "<table align=\"center\" width=\"100%\" summary=\"Playlist Table\" cellspacing=1><tr>";
 	echo "<tr valign=\"middle\"><td><b>Playlist</b>&nbsp;";
 	if( $config["playlist_option_hide"] === true )
 	{
@@ -643,7 +620,7 @@ if( ! $status["playlistlength"] == 0 )
 		echo "</small></td></tr>";
 	}
 	echo "</table>";
-	echo "<table summary=\"Playlist Content\" cellspacing=0><tr>";
+	echo "<table align=\"center\" width=\"100%\" summary=\"Playlist Content\" cellspacing=0><tr>";
 
 	/* Display Playlist if songs exist in the current playlist */
 	if( isset($status["playlistlength"] ))

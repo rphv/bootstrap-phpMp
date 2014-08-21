@@ -27,13 +27,13 @@ function outputs( $fp, $host, $color, $server, $commands )
 		$outputs[$i]["$val"] = preg_replace( "/^ /", "", $arg );
 	}	
 	echo "<br>";
-	echo "<table summary=\"Outputs\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Outputs\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td nowrap><b>Sound outputs for $host</b></td></tr>";
 	echo "<tr><td>";
-	echo "<table summary=\"Outputs\" border=0 cellspacing=1 bgcolor=\"{$color["body"][$i%2]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Outputs\" border=0 cellspacing=1 width=\"100%\">";
 	for( $i = "0"; $i < sizeOf( $outputs ); $i++ )
 	{
-		echo "<tr bgcolor=\"{$color["body"][$i%2]}\"><td nowrap>";
+		echo "<tr><td nowrap>";
 		if( ( ( $outputs[$i]["outputenabled"]%2 ) - 1 ) && $commands["enableoutput"] === true )
 		{
 			echo "[<a title=\"Enable this output\"  href=index.php?body=main&amp;feature=outputs&amp;server=$server&amp;command=enableoutput&amp;arg=$i>enable</a>]";
@@ -54,9 +54,9 @@ function login($fp, $default_sort, $color, $server, $arg, $dir, $remember)
 {
 	echo "<br>";
 	echo "<form target=_top action=\"index.php\" method=post>";
-	echo "<table summary=\"Login\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Login\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td><b>Password</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"]}\"><td>";
+	echo "<tr><td>";
 	echo "<input type=hidden value=\"$server\" name=server>";
 	echo "<input type=password name=passarg value=\"{$arg}\" size=20>";
 	echo "<input type=hidden value=\"" . rawurlencode( $dir ) . "\" name=dir>";
@@ -147,32 +147,32 @@ function stats( $fp, $color, $MPDversion, $phpMpVersion, $host, $port )
 
 	/* Begin Stats Form */
 	echo "<br>";
-	echo "<table summary=\"Statistics\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Statistics\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td nowrap><b>Statistics for $host:$port</b></td></tr>";
 	echo "<tr><td>";
-	echo "<table summary=\"Statistics\" border=0 cellspacing=1 bgcolor=\"{$color["body"][1]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Statistics\" border=0 cellspacing=1 width=\"100%\">";
 
 	$j=0;
 	foreach( $statistics as $key => $value )
 	{
 		for( $i = "0"; $i < sizeof( $statistics ); $i++ )
 		{
-			echo "<tr bgcolor=\"{$color["body"][$j%2]}\"><td><b>$key:</b>&nbsp;$value</td></tr>";
+			echo "<tr><td><b>$key:</b>&nbsp;$value</td></tr>";
 			break;
 		}
 		$j++;
 	}
 
-	echo "</table></td></tr><table>";
+	echo "</table></td></tr><table align=\"center\">";
 }
 
 function stream( $server, $color, $stream_browser, $url_icy, $url_shout, $dir, $updating )
 {
 	echo "<br>";
 	echo "<form action=index.php? name=1 target=playlist method=get>";
-	echo "<table summary=\"Add Stream\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Add Stream\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td><b>Add Stream</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"][0]}\"><td>";
+	echo "<tr><td>";
 	echo "<input type=hidden value=\"playlist\" name=body>";
 	echo "<input type=hidden value=$server name=server>";
 	echo "<input type=input name=stream size=40>";
@@ -181,9 +181,9 @@ function stream( $server, $color, $stream_browser, $url_icy, $url_shout, $dir, $
 
 	echo "<br>";
 	echo "<form action=index.php? name=2 target=playlist method=get>";
-	echo "<table summary=\"Search Webpage for Streams\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Search Webpage for Streams\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td><b>Search Webpage for Streams</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"][0]}\"><td>";
+	echo "<tr><td>";
 	echo "<input type=hidden value=\"playlist\" name=body>";
 	echo "<input type=hidden value=$server name=server>";
 	echo "<input type=input name=streamurl size=40>";
@@ -192,9 +192,9 @@ function stream( $server, $color, $stream_browser, $url_icy, $url_shout, $dir, $
 
 	echo "<br>";
 	echo "<form enctype=\"multipart/form-data\" action=\"index.php?\" target=\"playlist\" method=\"post\">";
-	echo "<table summary=\"Load Stream From Playlist\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Load Stream From Playlist\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 	echo "<tr><td><b>Load Stream From Playlist</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"][0]}\"><td>";
+	echo "<tr><td>";
 	echo "<input type=\"hidden\" value=\"playlist\" name=\"body\">";
 	echo "<input type=\"hidden\" value=\"$server\" name=\"server\">";
 	echo "<input type=\"file\" name=\"playlist_file[]\" size=30>";
@@ -207,9 +207,9 @@ function stream( $server, $color, $stream_browser, $url_icy, $url_shout, $dir, $
 	$icy_file = "{$real_path}/cache/stream-icy.xml";
 	$shout_file = "{$real_path}/cache/stream-shout.xml.gz";
 	if(isset($url_icy) && !empty($url_icy) && (is_file($icy_file) || $updating === true) && $stream_browser === true) {
-		echo "<table summary=\"Icecast Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+		echo "<table align=\"center\" summary=\"Icecast Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 		echo "<tr><td>";
-		echo "<table summary=\"Icecast Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+		echo "<table align=\"center\" summary=\"Icecast Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 		echo "<tr><td><b>Icecast Streams</b>";
 		echo "&nbsp;<small>(<a title=\"Show a table of current Icecast Streams\" href=\"index.php?body=main&amp;server=$server&amp;dir=$dir&amp;feature=stream-icy\" target=main>show</a>)</small>";
 		echo "</td></tr></table></td></tr></table>";
@@ -217,9 +217,9 @@ function stream( $server, $color, $stream_browser, $url_icy, $url_shout, $dir, $
 
 	echo "<br>";
 	if(isset($url_shout) && !empty($url_shout) && (is_file($shout_file) || $updating === true) && $stream_browser === true) {
-		echo "<table summary=\"Shoutcast Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+		echo "<table align=\"center\" summary=\"Shoutcast Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 		echo "<tr><td>";
-		echo "<table summary=\"Shoutcast Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+		echo "<table align=\"center\" summary=\"Shoutcast Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 		echo "<tr><td><b>Shoutcast Streams</b>";
 		echo "&nbsp;<small>(<a title=\"Show a table of current Shoutcast streams\" href=\"index.php?body=main&amp;server=$server&amp;dir=$dir&amp;feature=stream-shout\" target=main>show</a>)</small></td>";
 		echo "</tr></table></td></tr></table>";
@@ -262,9 +262,9 @@ function sbrowser( $server, $color, $feature, $server_data, $stream_browser, $ur
 			$k++;
 		}
 	}
-	echo "<br><table summary=\"Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<br><table align=\"center\" summary=\"Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 	echo "<tr><td>";
-	echo "<table summary=\"Streams\" border=\"0\" cellspacing=\"1\" bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Streams\" border=\"0\" cellspacing=\"1\" width=\"100%\">";
 	if( strcmp( $feature, "stream-icy" ) == "0" )
 	{ 
 		echo "<tr><td><b>Icecast Streams</b>";
@@ -311,16 +311,16 @@ function sbrowser( $server, $color, $feature, $server_data, $stream_browser, $ur
 	echo "</td></tr>";
 	echo "</table>";
 	echo "</form>";
-	echo "<table summary=\"Statistics\" border=0 cellspacing=1 bgcolor=\"{$color["body"][1]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Statistics\" border=0 cellspacing=1 width=\"100%\">";
 
 	$j = 0;
 
-	echo "<tr bgcolor=\"{$color["sort"]}\"><td></td><td>&nbsp;<b>Stream Information</b></td></tr>";
+	echo "<tr><td></td><td>&nbsp;<b>Stream Information</b></td></tr>";
 	$j=2;
 	$k=0;
 	for( $i = "0"; $i < sizeOf( $server_data ); $i++ )
 	{
-		echo "<tr bgcolor=\"{$color["body"][$k%2]}\"><a href=$i></a><td>";
+		echo "<tr><a href=$i></a><td>";
 		echo "[<a title=\"Add this stream to your playlist\" target=\"playlist\" href=\"index.php?body=playlist&amp;stream=";
 		echo rawurlencode( $server_data[$i]["listen_url"] );
 		while( strcmp( $server_data[$i]["server_name"], $server_data[($i+1)]["server_name"] ) == "0" )
@@ -343,8 +343,8 @@ function sbrowser( $server, $color, $feature, $server_data, $stream_browser, $ur
 		}
 		echo "</td></tr>";
 		if((strcmp($arg,"info") == 0 && strcmp($arg2,$i) == 0) || strcmp($arg,"info") == 0 && strcmp($arg2,"expandall") == 0) {
-			echo "<tr bgcolor=\"{$color["body"][$k%2]}\"><td></td><td>";
-			echo "<table><tr>";
+			echo "<tr><td></td><td>";
+			echo "<table align=\"center\"><tr>";
 			if(!empty($server_data[$i]["bitrate"])) {
 				echo "<td><b>Bitrate:</b> {$server_data[$i]["bitrate"]}</td>";
 			}
@@ -403,9 +403,9 @@ function sbrowser( $server, $color, $feature, $server_data, $stream_browser, $ur
 function server( $servers, $host, $port, $color )
 {
 	echo "<br>";
-	echo "<table summary=\"Server Selection\" border=0 cellspacing=1 bgcolor=\"{$color["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Server Selection\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td><b>Servers</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"]}\"><td>";
+	echo "<tr><td>";
 
 	// This is for those who utilize multiple MPD servers setup in phpMp's config
  	echo '<form method=post action="index.php" target=_top>';
@@ -434,9 +434,9 @@ function search( $fp, $color, $config, $dir, $search, $find, $arg, $sort, $serve
 {
 	echo "<br>";
 	echo "<form action=index.php? method=get>";
-	echo "<table summary=\"Search\" border=0 cellspacing=1 bgcolor=\"{$color["meta"]["title"]}\" width=\"100%\">";
+	echo "<table align=\"center\" summary=\"Search\" border=0 cellspacing=1 width=\"100%\">";
 	echo "<tr><td><b>Search</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["meta"]["body"][1]}\"><td>";
+	echo "<tr><td>";
 	echo "<select name=search>";
 
 	if( strcmp( $search, "filename" ) == "0" || strcmp( $find, "filename" ) == "0" )

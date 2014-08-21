@@ -27,7 +27,7 @@ function lsinfo2directoryTable( $lsinfo, $server, $sort, $addperm, $color )
 	{
        		$dirstr = basename( $lsinfo[$i] );
 		$full_dir = rawurlencode( $lsinfo[$i] );
-		$print[$i] = "<tr bgcolor=\"{$color[ ($i%2) ]}\"><td>";
+		$print[$i] = "<tr><td>";
 		$fc = strtoupper( mbFirstChar( $dirstr ));
 		if ($dic == "0" || $index[ ($dic-1) ]!=$fc)
 		{
@@ -66,9 +66,9 @@ function printSavePlaylistTable( $server, $color )
 	echo "<!-- Begin printSavePlaylistTable -->";
 	echo "<br>";
 	echo "<form action=index.php method=get>";
-	echo "<table summary=\"Save Playlist\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+	echo "<table align=\"center\" summary=\"Save Playlist\" cellspacing=1>";
 	echo "<tr><td><b>Save Playlist</b></td></tr>";
-	echo "<tr bgcolor=\"{$color["body"][0]}\"><td>";
+	echo "<tr><td>";
 	echo "<input name=arg size=40 autocomplete=on>";
 	echo "<input type=hidden name=body value=main>";
 	echo "<input type=hidden name=server value=\"$server\">";
@@ -96,7 +96,7 @@ function printDirectoryTable( $info, $dir, $sort, $server, $addperm, $color )
 	{
 		echo "<!-- Begin printDirectoryTable -->";
 		echo "<br>";
-	        echo "<table summary=\"Directory Border\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+	        echo "<table align=\"center\" summary=\"Directory Border\" cellspacing=1>";
 		echo "<tr><td nowrap><b>Directories</b>";
 	        printIndex($index,"","d");
 		$dir = rawurlencode($dir);
@@ -109,7 +109,7 @@ function printDirectoryTable( $info, $dir, $sort, $server, $addperm, $color )
 		}
 		echo "</td></tr>";  
 		echo "<tr><td>";
-		echo "<table summary=\"Directory\" cellspacing=1 bgcolor=\"{$color["body"][1]}\">";
+		echo "<table align=\"center\" summary=\"Directory\" cellspacing=1>";
 
 		$directories = "";
 		for( $i=0; $i < $count; $i++)
@@ -271,14 +271,14 @@ function fileinfo2musicTable( $info, $dir_url, $display_fields, $color, $server,
 
 		if( $addperm === true )
 		{
-			$mprint[$i] = "<tr bgcolor=$col><td>$mprint[$i][<a title=\"Add this song to the active playlist\" ";
+			$mprint[$i] = "<tr><td>$mprint[$i][<a title=\"Add this song to the active playlist\" ";
 			$mprint[$i] .= "target=\"playlist\" ";
 			$mprint[$i] .= "href=\"index.php?body=playlist&amp;server=$server&amp;command=add&amp;arg=$full_filename\">add</a>]</td>";
 			$mprint[$i] .= "<td>$split_filename</td>";
 		}
 		else
 		{
-			$mprint[$i] = "<tr bgcolor=$col><td>$split_filename</td>";
+			$mprint[$i] = "<tr><td>$split_filename</td>";
 		}
 
 		// The <td>s here must be included inside the if() else() blocks in case the user doesn't want it displayed at all.
@@ -289,7 +289,7 @@ function fileinfo2musicTable( $info, $dir_url, $display_fields, $color, $server,
 		$mprint[$i] .= "</tr>";
 	}
 	// The sort bar is created here.
-	$sort_bar = "<tr colspan=3 bgcolor=\"{$color["file"]["sort"]}\">";
+	$sort_bar = "<tr colspan=3>";
 
 	// This creates the column for 'Add'
 	if( $addperm == true )
@@ -390,15 +390,16 @@ function taginfo2musicTable( $info, $dir_url, $display_fields, $unknown, $color,
 	
 		if( $addperm === true )
 		{
-			$mprint[$i] = "<tr bgcolor=$col><td width=\"1%\">$mprint[$i][";
+			$mprint[$i] = "<tr><td width=\"1%\">$mprint[$i][";
 			$mprint[$i] .= "<a title=\"Add this song to the current playlist\" ";
 			$mprint[$i] .= "target=\"playlist\" ";
-			$mprint[$i] .= "href=\"index.php?body=playlist&amp;server=$server&amp;command=add&amp;arg=";
-			$mprint[$i] .= rawurlencode($full_filename) . "\">add</a>]</td>";
+			//$mprint[$i] .= "href=\"index.php?body=main&amp;server=$server&amp;command=add&amp;arg=";
+			$mprint[$i] .= " onclick=\"addToPlaylist('" . $full_filename . "')\">add</a>]</td>";
+			//$mprint[$i] .= rawurlencode($full_filename) . "\">add</a>]</td>";
 		}
 		else
 		{
-			$mprint[$i] = "<tr bgcolor=$col>";
+			$mprint[$i] = "<tr>";
 		}
 		for ( $x = 0; $x < sizeof($display_fields); $x++)
 		{
@@ -471,7 +472,7 @@ function taginfo2musicTable( $info, $dir_url, $display_fields, $unknown, $color,
 	}
 
 	// Sort bar is created here
-	$sort_bar = "<tr bgcolor=\"{$color["meta"]["sort"]}\">";
+	$sort_bar = "<tr>";
 
 	// This creates the column for 'Add'
 	if( $addperm === true  )
@@ -592,9 +593,9 @@ function printMusicTable( $add_all, $field_count, $use_javascript, $color, $info
 		echo "<input type=hidden name=\"body\" value=\"playlist\">";
 		echo "<input type=hidden name=\"server\" value=\"$server\">";
 		echo "</form>";
-		echo "<table summary=\"Music Separators\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+		echo "<table align=\"center\" summary=\"Music Separators\" cellspacing=1>";
 		echo "<tr><td>";
-		echo "<table summary=\"Music Separators\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+		echo "<table align=\"center\" summary=\"Music Separators\" cellspacing=1>";
 
 		echo "<a name=\"$title\"></a>";
 		if( $altcount > "0" )
@@ -636,7 +637,7 @@ function printMusicTable( $add_all, $field_count, $use_javascript, $color, $info
 		}
 		echo "</tr></table>";
 
-		echo "<table summary=\"Music\" cellspacing=1 bgcolor=\"{$color["body"][1]}\">";
+		echo "<table align=\"center\" summary=\"Music\" cellspacing=1>";
 		if( isset( $sortbar ))
 		{
 			echo $sortbar;
@@ -663,7 +664,7 @@ function printPlaylistTable( $color, $server, $info, $delete, $rmperm )
 	        // Begin table for Title & Index
 		echo "<!-- Begin printPlaylistTable -->";
 		echo "<br>";
-		echo "<table summary=\"Playlist Title & Index\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+		echo "<table align=\"center\" summary=\"Playlist Title & Index\" cellspacing=1>";
 		echo "<tr><a name=playlists></a>";
 		echo "<td nowrap>";
 		echo "<b>Saved Playlists</b>";
@@ -675,12 +676,12 @@ function printPlaylistTable( $color, $server, $info, $delete, $rmperm )
 
 		echo "</td></tr>";
 		echo "<tr><td>";
-		echo "<table summary=\"Playlist\" cellspacing=1 bgcolor=\"{$color["body"][0]}\">";
+		echo "<table align=\"center\" summary=\"Playlist\" cellspacing=1>";
 
 		// Begin for playlist
 		for ( $i=0; $i < $count; $i++ )
 		{
-		        echo "<tr bgcolor=\"{$color["body"][$i%2]}\">";
+		  echo "<tr>";
 			echo "<td>{$print[$i]}</td>";
 			echo "</tr>";
 		}

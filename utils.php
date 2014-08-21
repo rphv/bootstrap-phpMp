@@ -135,7 +135,7 @@ function displayDirectory( $dir, $dir_url, $sort, $title, $mfcount, $mtcount, $p
 {
 	echo "<!-- Begin displayDirectory  -->";
 	// The next line needs a cellspacing value of 2 since the other tables have 2 tables, and this one only has one
-	echo "<table summary=\"Directory\" cellspacing=1 bgcolor=\"{$color["title"]}\">";
+	echo "<table align=\"center\" summary=\"Directory\" cellspacing=1>";
 	echo "<tr><td>";
 	echo "<b>$title</b>&nbsp;";
 
@@ -234,8 +234,8 @@ function displayDirectory( $dir, $dir_url, $sort, $title, $mfcount, $mtcount, $p
 	}
 
 	echo "&nbsp;</small></td></tr><tr><td colspan=2>";
-	echo "<table style=\"background-color: {$color["body"][0]}\">";
-	echo "<tr bgcolor=\"{$color["body"][0]}\">";
+	echo "<table align=\"center\">";
+	echo "<tr>";
 	if( $search_bar ===  true && empty($feature)) {
 		echo "<td>";
 	} else {
